@@ -46,9 +46,15 @@ def transform(data):
 def get_paddle_court_name(resource_id):
     paddle_name = ''
     if resource_id == 'bdbd8388-7447-4675-b01e-7f26b2d723af':
-        paddle_name = 'paddle 1'
+        paddle_name = 'Paddle 1'
     elif resource_id == 'ffec2bf4-9914-4201-9cef-b4d1bd277b1a':
-        paddle_name = 'paddle 2'
+        paddle_name = 'Paddle 2'
+    elif resource_id == 'f457dda9-3a49-455b-91cb-f6dd47f412bd':
+        paddle_name = 'Paddle 3'
+    elif resource_id == '91c341b0-bbc2-4671-9c54-8ddf8816a0d1':
+        paddle_name = 'Paddle 4'
+    elif resource_id == 'f9c1edd7-4c52-45ce-b5b0-755b8d73ea26':
+        paddle_name = 'Paddle 5'
     
 
 
