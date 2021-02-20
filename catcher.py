@@ -37,8 +37,22 @@ def transform(data):
 
     return result
 
+# 'bdbd8388-7447-4675-b01e-7f26b2d723af' = 'paddle 1',
+# 'ffec2bf4-9914-4201-9cef-b4d1bd277b1a' = 'paddle 2',
+# 'f457dda9-3a49-455b-91cb-f6dd47f412bd' = 'paddle 3',
+# '91c341b0-bbc2-4671-9c54-8ddf8816a0d1' = 'paddle 4',
+# 'f9c1edd7-4c52-45ce-b5b0-755b8d73ea26' = 'paddle 5',
+
 def get_paddle_court_name(resource_id):
-    return ''
+    paddle_name = ''
+    if resource_id == 'bdbd8388-7447-4675-b01e-7f26b2d723af':
+        paddle_name = 'paddle 1'
+    elif resource_id == 'ffec2bf4-9914-4201-9cef-b4d1bd277b1a':
+        paddle_name = 'paddle 2'
+    
+
+
+    return paddle_name
 
 def save(data, dt):
     filename = 'sunday_paddle.txt'
