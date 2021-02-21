@@ -3,10 +3,13 @@ from pprint import pprint
 import requests
 
 
-def get_url(today):
-    in_a_week = today + timedelta(days=6)
+def next_search_date(start):
+    in_a_week = start.date() + timedelta(days=7)
+    return in_a_week
+
+def url_for_date(search_date):
     url = "https://playtomic.io/api/v1/availability?user_id=me&tenant_id=da776daf-43b3-11e8-8674-52540049669c&sport_id=PADEL&local_start_min={}T00%3A00%3A00&local_start_max={}T23%3A59%3A59"
-    url = url.format(in_a_week, in_a_week)
+    url = url.format(search_date, search_date)
     return url
 
 def get_data(url):
@@ -33,7 +36,7 @@ def transform(data):
         paddle_court_name = get_paddle_court_name(resource_id)
         slots = element['slots']
         available_slots_count = len(slots)
-        result.append({'name': paddle_court_name,'count': available_slots_count})
+        result.append({'name': paddle_court_name,'available_slots': available_slots_count})
 
     return result
 
@@ -56,23 +59,22 @@ def get_paddle_court_name(resource_id):
     elif resource_id == 'f9c1edd7-4c52-45ce-b5b0-755b8d73ea26':
         paddle_name = 'Paddle 5'
     
-
-
     return paddle_name
 
 def save(data, dt):
     filename = 'sunday_paddle.txt'
-    dt = dt.strftime('%m/%d/%Y %H:%M')
+    dt_str = dt.strftime('%m/%d/%Y %H:%M')
     with(open(filename, 'a')) as f:
         for x in data:
-            line = '{}, {}, {}\n'.format(dt, x['name'], x['count'])
+            line = '{}, {}, {}\n'.format(dt_str, x['name'], x['available_slots'])
             f.write(line)
         f.write('-'*20)
         f.write('\n')
 
 def run():
     run_time = datetime.now()
-    url = get_url(run_time.date())
+    next_search = next_search_date(run_time)
+    url = url_for_date(next_search)
     data = get_data(url)
     data = transform(data)
     save(data, run_time)
